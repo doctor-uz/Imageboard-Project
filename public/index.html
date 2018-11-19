@@ -1,10 +1,60 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>Imageboard</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
+    <h2>Latest Images</h2>
+
+    <div id="main">
+
+
+        <div class="kitty" v-for="image in images">
+                    <img :src= "image.url">
+                    <p> {{image.title}} </p>
+        </div>
+
+<!-- lopping throw in array pokemon -->
+        <!-- <ul v-for= 'item in images'>
+            <li>{{ item }}</li>
+        </ul>
+
+{{item.title}} -->
+
+        <!-- <p v-for='listcuteanimals in cuteAnimals'>
+            {{listcuteanimals.name}} ||
+            {{listcuteanimals.cuteScore}}
+        </p> -->
+
+<!-- <img :src="images"> -->
+
+
+
+
+<!-- if-else statment -->
+        <!-- <p v-if = "pokemon.length > 0">
+            I'm the special text you only see if interegr is 1 !!!
+        </p>
+
+        <p v-else>render me instead!</p>
+
+        <p v-for="itemfromarray in pokemonArray">
+            {{itemfromarray}}
+        </p> -->
+
+        <!-- <img height="100px" width="200px" :src="imageSrc" :class="img" > -->
+
+
+    </div>
+
+
+
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
