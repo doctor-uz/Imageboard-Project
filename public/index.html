@@ -11,10 +11,38 @@
     <div id="main">
 
 
+
+
+
+
         <div class="kitty" v-for="image in images">
                     <img :src= "image.url">
                     <p> {{image.title}} </p>
-    </div>
+
+        </div>
+
+
+        <form>
+            <input v-model = "form.title" placeholder="title" type="text" name="title">
+            <input v-model = "form.description" placeholder="description" type="text" name="description">
+            <input v-model = "form.username" placeholder="username" type="text" name="username">
+            <input type="file" name="title" accept="image/*" @change="handleFileChange">
+            <button @click = "uploadFile">Upload</button>
+
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- lopping throw in array pokemon -->
         <!-- <ul v-for= 'item in images'>
