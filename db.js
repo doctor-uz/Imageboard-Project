@@ -18,3 +18,19 @@ exports.insertImages = (url, username, title, description) => {
         [url, username, title, description]
     );
 };
+
+// exports.submitComment = (comment, username, image_id) => {
+//     return db.query(
+//         `INSERT INTO comments (comment, username, image_id) VALUES ($1, $2, $3)
+//         RETURNING comment, username AS commentUser, created_at AS commentCreate`,
+//         [comment || null, username || null, image_id]
+//     );
+// };
+
+exports.getImageId = id => {
+    return db.query(
+        `SELECT * FROM images
+        WHERE id = $1`,
+        [id]
+    );
+};

@@ -4,6 +4,9 @@ const ca = require("chalk-animation");
 
 var s3Url = require("./config.json");
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 //// do not touch!
 var multer = require("multer");
 var uidSafe = require("uid-safe");
@@ -45,6 +48,28 @@ app.get("/kitty", (req, res) => {
         });
 });
 
+app.get("/kitty/:id", (req, res) => {
+    db.getImageId(req.params.id)
+        .then(response => {
+            res.json(response);
+            console.log("Response: ", response);
+        })
+        .catch(function(err) {
+            console.log("I blyat: ", err);
+        });
+});
+
+// app.post("/kitty/:id", (req, res) => {
+//     db.getImageId(req.body.comment, req.body.username, req.params.id)
+//         .then(response => {
+//             res.json(response);
+//             console.log("Response: ", response);
+//         })
+//         .catch(function(err) {
+//             console.log("I blyat: ", err);
+//         });
+// });
+
 ///==========from git
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     // If nothing went wrong the file is already in the uploads directory
@@ -70,6 +95,24 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
         });
     }
 });
+
+// app.post("/submit", function(req, res) {
+//     // If nothing went wrong the file is already in the uploads directory
+//     if (req.file) {
+//         // console.log("req file.filename: ", req.file.filename);
+//         // console.log("req file: ", req.file);
+//         console.log("req body: ", req.body);
+//
+//         db.submitComment(req.body.comment, req.body.username).then(response => {
+//             res.json(response);
+//             console.log("Response: ", response);
+//         });
+//     } else {
+//         res.json({
+//             success: false
+//         });
+//     }
+// });
 
 //-=============above from git
 

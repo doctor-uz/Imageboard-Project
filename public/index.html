@@ -11,14 +11,12 @@
     <div id="main">
 
 
-
-
-
-
         <div class="kitty" v-for="image in images">
-                    <img :src= "image.url">
-                    <p> {{image.title}} </p>
 
+            <div class="kitty" @click="toggleComponent">
+                    <img :id = "image.id" :src= "image.url">
+                    <p> {{image.title}} </p>
+            </div>
         </div>
 
 
@@ -32,13 +30,40 @@
         </form>
 
 
+        <some-component :image-id = 'imageId' v-if = "imageId" @close-the-component = "closingTheComponent" @click = "toggleComponent">
+        </some-component>
+
+<!-- This is main div -->
+</div>
+
+
+<!-- this template must be outside of #main -->
+<script id="my-template" type="text/x-template">
+
+    <div class="popup" @click='closeComponent'>
+        <img id = "bigimage" :src= "img.url" >
+        <p> <b>Created at:</b> {{img.created_at}} </p>
+        <p> <b>Description:</b> {{img.description}} </p>
+        <p> <b>Title:</b> {{img.title}} </p>
+        <p> <b>Created by:</b> {{img.username}} </p>
+        <hr>
+
+        <form method="POST">
+            <input v-model = "form.comment" placeholder="comment" type="text" name="comment">
+            <input v-model = "form.username" placeholder="username" type="text" name="username">
+            <button @click = "submitComment">Submit</button>
+
+         <div class="comments">
+        </div>
+
+        </form>
 
 
 
 
+    </div>
 
-
-
+</script>
 
 
 
@@ -57,25 +82,6 @@
         </p> -->
 
 <!-- <img :src="images"> -->
-
-
-
-
-<!-- if-else statment -->
-        <!-- <p v-if = "pokemon.length > 0">
-            I'm the special text you only see if interegr is 1 !!!
-        </p>
-
-        <p v-else>render me instead!</p>
-
-        <p v-for="itemfromarray in pokemonArray">
-            {{itemfromarray}}
-        </p> -->
-
-        <!-- <img height="100px" width="200px" :src="imageSrc" :class="img" > -->
-
-
-    </div>
 
 
 

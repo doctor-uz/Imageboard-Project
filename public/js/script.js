@@ -1,9 +1,71 @@
 (function() {
     //all of our vue code will go here
+    Vue.component("some-component", {
+        template: "#my-template",
+
+        props: ["imageId"],
+
+        //#3 step. using props imageID
+
+        data: function() {
+            return {
+                img: {
+                    created_at: "",
+                    description: "",
+                    title: "",
+                    url: "",
+                    username: ""
+                },
+                form: {
+                    comment: "",
+                    username: ""
+                }
+            };
+        },
+
+        mounted: function() {
+            console.log("this of vue ", this.imageId);
+            //it should be number which is ID
+            var self = this;
+            axios.get("/kitty/" + this.imageId).then(function(resp) {
+                self.img.created_at = resp.data.rows[0].created_at;
+                self.img.description = resp.data.rows[0].description;
+                self.img.title = resp.data.rows[0].title;
+                self.img.url = resp.data.rows[0].url;
+                self.img.username = resp.data.rows[0].username;
+
+                // self.comments = resp.data.rows;
+
+                // self.form.comment = resp.data.rows[0].comment;
+
+                // console.log("this is comment ", self.form.comment);
+
+                console.log("this is response ", resp.data.rows[0].url);
+            });
+        },
+
+        methods: {
+            handleClick: function() {
+                console.log("clicked!!!");
+            },
+            closeComponent: function() {
+                this.$emit("close-the-component");
+                console.log("x clicked");
+            }
+        }
+    });
+
     new Vue({
         el: "#main",
         data: {
+            firstName: "Dilshod Rahmatov",
+
             images: [],
+            //#2 step. Waht is image id that was clicked on
+            imageId: 0,
+
+            showComponent: false,
+
             form: {
                 title: "",
                 description: "",
@@ -22,18 +84,29 @@
 
                 // console.log("self :", self.images);
             });
+
+            // axios.post("")
         }, //mounted ends here
 
         //every function thet runs in response to an event
         methods: {
-            handleFileChange: function(e) {
-                // console.log("handle File Change running!!", e.target.files[0]);
-                this.form.file = e.target.files[0];
-                // console.log("this.form: ", this.form);
+            toggleComponent: function(e) {
+                this.imageId = e.target.id;
+                console.log("this is id ", this.imageId);
             },
 
-            //function that runs when user clicks "submiot" button
-            //e preventing defaults such as refresh the page always when we clicking the buttonand urls
+            closingTheComponent: function() {
+                this.imageId = 0;
+            },
+
+            handleFileChange: function(e) {
+                this.form.file = e.target.files[0];
+            },
+
+            submitComment: function() {
+                console.log("heee");
+            },
+
             uploadFile: function(e) {
                 var self = this;
                 e.preventDefault();
@@ -47,9 +120,9 @@
                 formData.append("username", this.form.username);
 
                 axios.post("/upload", formData).then(function(resp) {
-                    console.log("resp: ", resp);
                     var imagesArrayFromServer = resp.data.rows[0];
                     self.images.unshift(imagesArrayFromServer);
+                    console.log("resp: ", self.images);
                 });
             }
         }

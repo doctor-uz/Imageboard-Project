@@ -21,3 +21,23 @@ img {
     object-fit: cover;
     border: black;
 }
+
+.popup {
+    background-color: skyblue;
+    width: 600px;
+    height: 600px;
+    display: inline-block;
+    text-align: center;
+    padding: 20px 100px;
+    position: absolute;
+    border-radius: 14px;
+    z-index: 9999;
+    transition-delay: 1s;
+    transform: translateX(33%);
+    background-color: rgba(135, 206, 250, 0.87);
+}
+
+#bigimage {
+    width: 350px;
+    height: 350px;
+}
