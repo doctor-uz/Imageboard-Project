@@ -16,10 +16,9 @@
                     url: "",
                     username: ""
                 },
-                form: {
-                    comment: "",
-                    username: ""
-                }
+                comment: "",
+                commentUser: "",
+                comments: []
             };
         },
 
@@ -34,11 +33,7 @@
                 self.img.url = resp.data.rows[0].url;
                 self.img.username = resp.data.rows[0].username;
 
-                // self.comments = resp.data.rows;
-
-                // self.form.comment = resp.data.rows[0].comment;
-
-                // console.log("this is comment ", self.form.comment);
+                self.comments = resp.data.rows;
 
                 console.log("this is response ", resp.data.rows[0].url);
             });
@@ -51,6 +46,22 @@
             closeComponent: function() {
                 this.$emit("close-the-component");
                 console.log("x clicked");
+            },
+            postComment: function(e) {
+                e.preventDefault();
+                var self = this;
+                var formData = {
+                    comment: this.comment,
+                    commentUser: this.commentUser
+                };
+                axios
+                    .post("/kitty/" + this.imageId, formData)
+                    .then(function(resp) {
+                        self.comments.unshift(resp.data.results.rows[0]);
+                    })
+                    .catch(err => {
+                        console.log("Post comment ERROR: ", err);
+                    });
             }
         }
     });
@@ -90,6 +101,26 @@
 
         //every function thet runs in response to an event
         methods: {
+            getMoreImages: function() {
+                // console.log("get images running!!!!");
+                // console.log("This dot images: ", this.images);
+                // console.log(
+                //     "this is last id ",
+                //     this.images[this.images.length - 1].id
+                // );
+                var lastId = this.images[this.images.length - 1].id;
+                var self = this;
+                //GET /get-more-images/6
+                axios.get("/get-more-images/" + lastId).then(function(resp) {
+                    // console.log("resp in /get-more-images: ", resp);
+                    self.images.push.apply(self.images, resp.data);
+
+                    // if (lastId == 1) {
+                    //     button false
+                    // }
+                });
+            },
+
             toggleComponent: function(e) {
                 this.imageId = e.target.id;
                 console.log("this is id ", this.imageId);

@@ -8,6 +8,18 @@ body {
     justify-content: flex-start;
 }
 
+.comment {
+    width: 500px;
+    height: 100px;
+    border: 2px solid black;
+    margin-top: 30px;
+    margin-left: 30px;
+    background-color: white;
+    border-radius: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+
 .kitty {
     margin: 8px;
     padding: 5px;
@@ -22,10 +34,18 @@ img {
     border: black;
 }
 
+.image {
+    margin: 12px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
+    /* padding: 5px; */
+    background: white;
+    border-radius: 3px;
+}
+
 .popup {
     background-color: skyblue;
     width: 600px;
-    height: 600px;
+    /* height: 1200px; */
     display: inline-block;
     text-align: center;
     padding: 20px 100px;

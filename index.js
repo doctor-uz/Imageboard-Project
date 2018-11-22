@@ -41,7 +41,6 @@ app.get("/kitty", (req, res) => {
     db.getImages()
         .then(response => {
             res.json(response);
-            // console.log("Response: ", response);
         })
         .catch(function(err) {
             console.log("BLYAAAA: ", err);
@@ -59,24 +58,24 @@ app.get("/kitty/:id", (req, res) => {
         });
 });
 
-// app.post("/kitty/:id", (req, res) => {
-//     db.getImageId(req.body.comment, req.body.username, req.params.id)
-//         .then(response => {
-//             res.json(response);
-//             console.log("Response: ", response);
-//         })
-//         .catch(function(err) {
-//             console.log("I blyat: ", err);
-//         });
-// });
+app.post("/kitty/:id", (req, res) => {
+    const imageId = req.params.id;
+    db.submitComment(req.body.comment, req.body.commentUser, imageId)
+        .then(response => {
+            res.json(response);
+            // console.log("Response: ", response);
+        })
+        .catch(function(err) {
+            console.log("I blyat post: ", err);
+        });
+});
 
-///==========from git
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     // If nothing went wrong the file is already in the uploads directory
     if (req.file) {
-        console.log("req file.filename: ", req.file.filename);
-        console.log("req file: ", req.file);
-        console.log("req body: ", req.body);
+        // console.log("req file.filename: ", req.file.filename);
+        // console.log("req file: ", req.file);
+        // console.log("req body: ", req.body);
 
         var url = s3Url.s3Url + req.file.filename;
         console.log("this is s3url ", s3Url.s3Url);
@@ -96,24 +95,15 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     }
 });
 
-// app.post("/submit", function(req, res) {
-//     // If nothing went wrong the file is already in the uploads directory
-//     if (req.file) {
-//         // console.log("req file.filename: ", req.file.filename);
-//         // console.log("req file: ", req.file);
-//         console.log("req body: ", req.body);
-//
-//         db.submitComment(req.body.comment, req.body.username).then(response => {
-//             res.json(response);
-//             console.log("Response: ", response);
-//         });
-//     } else {
-//         res.json({
-//             success: false
-//         });
-//     }
-// });
+//get more images /get-moire=images/33
+app.get("/get-more-images/:id", (req, res) => {
+    // console.log("req.params.id is: ", req.params.id);
 
-//-=============above from git
+    var lastId = req.params.id;
+    db.getMoreImages(lastId).then(images => {
+        // console.log("images in get more images: ", images);
+        res.json(images);
+    });
+});
 
 app.listen(8080, () => ca.rainbow("listening"));

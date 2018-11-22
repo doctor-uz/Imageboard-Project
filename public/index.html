@@ -20,6 +20,11 @@
         </div>
 
 
+
+<button @click = "getMoreImages">More</button>
+
+
+
         <form>
             <input v-model = "form.title" placeholder="title" type="text" name="title">
             <input v-model = "form.description" placeholder="description" type="text" name="description">
@@ -40,7 +45,8 @@
 <!-- this template must be outside of #main -->
 <script id="my-template" type="text/x-template">
 
-    <div class="popup" @click='closeComponent'>
+    <div class="popup">
+        <h1 align="right" @click='closeComponent'>X</h1>
         <img id = "bigimage" :src= "img.url" >
         <p> <b>Created at:</b> {{img.created_at}} </p>
         <p> <b>Description:</b> {{img.description}} </p>
@@ -48,12 +54,23 @@
         <p> <b>Created by:</b> {{img.username}} </p>
         <hr>
 
-        <form method="POST">
-            <input v-model = "form.comment" placeholder="comment" type="text" name="comment">
-            <input v-model = "form.username" placeholder="username" type="text" name="username">
-            <button @click = "submitComment">Submit</button>
+        <div class="comments">
+                    <h3 class="">Comments</h3>
+                    <form class="comment_input">
+                        <input v-model="comment" type="text" name="comment" placeholder="Comment" required>
+                        <input v-model="commentUser" type="text" name="commentUser" placeholder="Username" required>
+                        <button class="ui blue button" @click="postComment">Submit</button>
+                    </form>
+                    <div v-for="comment in comments">
+                        <div class="comment">
 
-         <div class="comments">
+                            <div class="text">
+                                <h2>{{comment.comment}}</h2>
+                            </div>
+                                <a class="author">{{comment.commentuser}}</a>
+
+                        </div>
+                    </div>
         </div>
 
         </form>
