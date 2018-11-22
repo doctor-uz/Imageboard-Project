@@ -59,7 +59,9 @@ app.get("/kitty/:id", (req, res) => {
 });
 
 app.post("/kitty/:id", (req, res) => {
+    // var self = this;
     const imageId = req.params.id;
+
     db.submitComment(req.body.comment, req.body.commentUser, imageId)
         .then(response => {
             res.json(response);

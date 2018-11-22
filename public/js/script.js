@@ -57,7 +57,9 @@
                 axios
                     .post("/kitty/" + this.imageId, formData)
                     .then(function(resp) {
-                        self.comments.unshift(resp.data.results.rows[0]);
+                        // self.comments.unshift(resp.data.results.rows[0]);
+                        self.comments.unshift(resp.data.rows[0]);
+                        console.log("this is data rows: ", resp);
                     })
                     .catch(err => {
                         console.log("Post comment ERROR: ", err);
