@@ -3,54 +3,63 @@
 <head>
     <title>Imageboard</title>
     <link rel="stylesheet" href="/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+
+    <div id="header">
+        <h2 align="center">Imagestan</h2>
+    </div>
+
 </head>
+
 <body>
 
-    <h2>Latest Images</h2>
+    <div id="container">
 
     <div id="main">
 
-
-        <div class="kitty" v-for="image in images">
-
-            <div class="kitty" @click="toggleComponent">
-                    <img :id = "image.id" :src= "image.url">
-                    <p> {{image.title}} </p>
-            </div>
+        <div id="upload">
+            <!-- <hr> -->
+            <form id="forminput">
+                <input v-model = "form.title" placeholder="title" type="text" name="title">
+                <input v-model = "form.description" placeholder="description" type="text" name="description">
+                <input v-model = "form.username" placeholder="username" type="text" name="username">
+                <input id="choose" type="file" name="title" accept="image/*" @change="handleFileChange">
+                <button @click = "uploadFile">Upload</button>
+            </form>
+            <!-- <hr> -->
         </div>
+        <div id="body">
 
-
-
-<button @click = "getMoreImages">More</button>
-
-
-
-        <form>
-            <input v-model = "form.title" placeholder="title" type="text" name="title">
-            <input v-model = "form.description" placeholder="description" type="text" name="description">
-            <input v-model = "form.username" placeholder="username" type="text" name="username">
-            <input type="file" name="title" accept="image/*" @change="handleFileChange">
-            <button @click = "uploadFile">Upload</button>
-
-        </form>
-
-
-        <some-component :image-id = 'imageId' v-if = "imageId" @close-the-component = "closingTheComponent" @click = "toggleComponent">
-        </some-component>
-
-<!-- This is main div -->
+            <div class="kitty1" v-for="image in images">
+                <a :href=" '#' + image.id" @click="toggleComponent">
+                    <img :src="image.url" :alt="image.title">
+                    <p align="center"> {{image.title}} </p>
+                </a>
+                <p align = "center" class="image-description">{{image.description}}</p>
+            </div>
+<div class="button">
+            <button id="more" @click = "getMoreImages" v-if = "moreButton">More</button>
 </div>
 
+
+            <some-component :image-id = 'imageId' v-if = "imageId" @close-the-component = "closingTheComponent" @click = "toggleComponent">
+            </some-component>
+        </div>
+<!-- This is main div -->
+</div>
 
 <!-- this template must be outside of #main -->
 <script id="my-template" type="text/x-template">
 
     <div class="popup">
         <h1 align="right" @click='closeComponent'>X</h1>
-        <img id = "bigimage" :src= "img.url" >
+
+        <img id = "bigimage" :src="img.url" :alt="img.title">
+
         <p> <b>Created at:</b> {{img.created_at}} </p>
         <p> <b>Description:</b> {{img.description}} </p>
         <p> <b>Title:</b> {{img.title}} </p>
+
         <p> <b>Created by:</b> {{img.username}} </p>
         <hr>
 
@@ -59,50 +68,30 @@
                     <form class="comment_input">
                         <input v-model="comment" type="text" name="comment" placeholder="Comment" required>
                         <input v-model="commentUser" type="text" name="commentUser" placeholder="Username" required>
-                        <button class="ui blue button" @click="postComment">Submit</button>
+                        <button class="submit" @click="postComment">Submit</button>
                     </form>
                     <div v-for="comment in comments">
                         <div class="comment">
 
                             <div class="text">
-                                <h2>{{comment.comment}}</h2>
+                                <h3>{{comment.comment}}</h3>
                             </div>
-                                <a class="author">{{comment.commentuser}}</a>
+
+                            <a class="author">{{comment.commentuser}}</a>
 
                         </div>
+                        <!-- <p @click = "deleteComment">Delete comment<p> -->
+
                     </div>
+
         </div>
-
-        </form>
-
-
-
 
     </div>
 
 </script>
 
 
-
-
-
-<!-- lopping throw in array pokemon -->
-        <!-- <ul v-for= 'item in images'>
-            <li>{{ item }}</li>
-        </ul>
-
-{{item.title}} -->
-
-        <!-- <p v-for='listcuteanimals in cuteAnimals'>
-            {{listcuteanimals.name}} ||
-            {{listcuteanimals.cuteScore}}
-        </p> -->
-
-<!-- <img :src="images"> -->
-
-
-
-
+</div> <!--this is container div -->
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>

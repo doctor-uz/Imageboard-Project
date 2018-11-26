@@ -8,7 +8,7 @@ exports.getImages = () => {
         `SELECT *
         FROM images
         ORDER BY id DESC
-        LIMIT 4`
+        LIMIT 5`
     );
 };
 

@@ -1,11 +1,80 @@
 body {
     margin: 10px;
+    background-color: skyblue;
+    /* background-color: #abc082; */
 }
 
-#main {
+h2 {
+    font-family: "Pacifico";
+    font-size: 38px;
+    width: 300px;
+    color: #612147;
+}
+
+#header {
+    background: url("naqsh.jpg") no-repeat center;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-size: cover;
+    font-size: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
+    width: 1400px;
+    margin-left: 8px;
+    border-radius: 20px;
+}
+
+#upload {
+    background: url("input2.jpg");
+    background-size: 50px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+#choose {
+    width: 300px;
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+/* nado posmotret */
+.arrow-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 450px;
+    width: 650px;
+}
+
+#body {
+    display: flex;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+input {
+    border-radius: 10px;
+    width: 180px;
+    height: 25px;
+    font-size: 18px;
+}
+
+.button {
+    width: 1200px;
+    height: 35px;
+}
+
+button {
+    font-size: 18px;
+    border-radius: 20px;
+    width: 150px;
+}
+
+#forminput {
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .comment {
@@ -20,44 +89,51 @@ body {
     padding-left: 10px;
 }
 
-.kitty {
+.kitty1 {
+    display: inline-block;
+    position: relative;
     margin: 8px;
     padding: 5px;
-    border: 2px solid black;
-    border-radius: 5%;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 0px rgba(10, 20, 0, 0.75);
+    background-color: white;
 }
 
+.kitty1:hover {
+    box-shadow: 0px 0px 5px 5px rgba(10, 20, 80, 0.5);
+}
+
+a img {
+    border-radius: 30px;
+    border-image-source: url("/border-image.png");
+    border-image-slice: 70;
+    border-image-repeat: stretch;
+}
+
+/* popup image style*/
 img {
+    position: relative;
     height: 250px;
     width: 250px;
-    object-fit: cover;
-    border: black;
-}
-
-.image {
-    margin: 12px;
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
-    /* padding: 5px; */
-    background: white;
-    border-radius: 3px;
 }
 
 .popup {
-    background-color: skyblue;
-    width: 600px;
-    /* height: 1200px; */
+    background-color: #65688a;
     display: inline-block;
     text-align: center;
-    padding: 20px 100px;
+    justify-content: center;
+    right: 600px;
+    padding: 20px;
     position: absolute;
     border-radius: 14px;
     z-index: 9999;
     transition-delay: 1s;
     transform: translateX(33%);
-    background-color: rgba(135, 206, 250, 0.87);
+    background-color: rgba(101, 104, 138, 0.87);
 }
 
 #bigimage {
-    width: 350px;
+    width: 550px;
     height: 350px;
 }

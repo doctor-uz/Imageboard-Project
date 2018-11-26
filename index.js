@@ -51,7 +51,7 @@ app.get("/kitty/:id", (req, res) => {
     db.getImageId(req.params.id)
         .then(response => {
             res.json(response);
-            console.log("Response: ", response);
+            // console.log("Response: ", response);
         })
         .catch(function(err) {
             console.log("I blyat: ", err);
@@ -75,10 +75,6 @@ app.post("/kitty/:id", (req, res) => {
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     // If nothing went wrong the file is already in the uploads directory
     if (req.file) {
-        // console.log("req file.filename: ", req.file.filename);
-        // console.log("req file: ", req.file);
-        // console.log("req body: ", req.body);
-
         var url = s3Url.s3Url + req.file.filename;
         console.log("this is s3url ", s3Url.s3Url);
         db.insertImages(
