@@ -195,7 +195,7 @@
             },
 
             handleFileChange: function(e) {
-                document.getElementById("uploadFile").value = e.target.value;
+                // document.getElementById("uploadFile").value = e.target.value;
                 this.form.file = e.target.files[0];
             },
 
