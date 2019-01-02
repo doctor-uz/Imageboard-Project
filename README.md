@@ -1,6 +1,6 @@
 # Image Board - Imagistan
 
-##Summary
+## Summary
 
 This is a site where you can upload pictures about of Uzbekistan. 
 
