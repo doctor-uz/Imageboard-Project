@@ -1,4 +1,4 @@
-# Image Board - Imagistan
+# Image Board - Imagestan
 
 ## Summary
 
